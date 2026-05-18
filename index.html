@@ -1,0 +1,1164 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#F4EFE6">
+<title>Animal Quest — Moduri de joc</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT@0,9..144,300..900,0..100;1,9..144,300..900,0..100&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #F4EFE6;
+  --paper: #FBF7EE;
+  --ink: #2E2418;
+  --ink-soft: #5C4A36;
+  --coral: #E07856;
+  --coral-soft: #F4B89D;
+  --moss: #6B8E5A;
+  --moss-soft: #A8C094;
+  --mustard: #D9A441;
+  --sky: #5B8FA8;
+  --sky-soft: #A8C5D4;
+  --plum: #8B5A6E;
+  --teal: #4A8B7E;
+  --rule: rgba(46, 36, 24, 0.12);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: "Fraunces", Georgia, serif;
+  font-optical-sizing: auto;
+  font-variation-settings: "SOFT" 50;
+  -webkit-font-smoothing: antialiased;
+  line-height: 1.55;
+  overflow-x: hidden;
+}
+
+body {
+  background-image:
+    radial-gradient(circle at 12% 8%, rgba(224, 120, 86, 0.06) 0, transparent 35%),
+    radial-gradient(circle at 88% 92%, rgba(107, 142, 90, 0.06) 0, transparent 35%),
+    radial-gradient(circle at 50% 50%, rgba(91, 143, 168, 0.03) 0, transparent 60%);
+  min-height: 100vh;
+}
+
+/* ========== LANDING ========== */
+.landing {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 32px 20px 80px;
+}
+
+.landing.hidden { display: none; }
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: "Fraunces", serif;
+  font-weight: 500;
+  font-style: italic;
+  font-size: 14px;
+  color: var(--moss);
+  letter-spacing: 0.02em;
+  margin-bottom: 24px;
+}
+
+.brand img.brand-logo {
+  width: 36px;
+  height: 36px;
+  flex-shrink: 0;
+  display: block;
+}
+
+.hero h1 {
+  font-family: "Fraunces", serif; font-weight: 900; font-variation-settings: "SOFT" 100, "opsz" 144;
+  font-style: italic;
+  font-size: clamp(64px, 16vw, 112px);
+  line-height: 0.92;
+  color: var(--coral);
+  letter-spacing: -0.025em;
+  margin-bottom: 8px;
+}
+
+.hero h1 .amp {
+  color: var(--moss);
+  font-style: italic;
+}
+
+.hero .tagline {
+  font-family: "Fraunces", serif;
+  font-style: italic;
+  font-size: clamp(18px, 4.5vw, 22px);
+  font-weight: 400;
+  color: var(--ink-soft);
+  max-width: 460px;
+  margin-bottom: 28px;
+}
+
+.intro {
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  border-radius: 18px;
+  padding: 20px 22px;
+  margin-bottom: 36px;
+  font-size: 15.5px;
+  color: var(--ink-soft);
+  box-shadow: 0 1px 0 rgba(255,255,255,0.6) inset;
+}
+
+.intro strong { color: var(--ink); font-weight: 600; }
+
+/* Category sections */
+.category {
+  margin-bottom: 36px;
+}
+
+.category-header {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  margin-bottom: 14px;
+  padding-bottom: 8px;
+  border-bottom: 1.5px dashed var(--rule);
+}
+
+.category-header h2 {
+  font-family: "Fraunces", serif; font-weight: 900; font-variation-settings: "SOFT" 100;
+  font-size: 24px;
+  color: var(--ink);
+  letter-spacing: -0.01em;
+}
+
+.category-header .count {
+  font-family: "Fraunces", serif;
+  font-style: italic;
+  font-size: 14px;
+  color: var(--ink-soft);
+}
+
+.category[data-tone="classics"] .category-header h2 { color: var(--coral); }
+.category[data-tone="intuitie"] .category-header h2 { color: var(--sky); }
+.category[data-tone="miscare"] .category-header h2 { color: var(--mustard); }
+.category[data-tone="matematica"] .category-header h2 { color: var(--moss); }
+.category[data-tone="proportii"] .category-header h2 { color: var(--plum); }
+.category[data-tone="sortare"] .category-header h2 { color: var(--teal); }
+
+.mode-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+}
+
+@media (min-width: 540px) {
+  .mode-grid { grid-template-columns: 1fr 1fr; }
+}
+
+.mode-card {
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  border-radius: 14px;
+  padding: 14px 16px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+  text-align: left;
+  width: 100%;
+  font-family: inherit;
+  color: inherit;
+}
+
+.mode-card:hover, .mode-card:focus-visible {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(46, 36, 24, 0.08);
+  border-color: var(--ink-soft);
+  outline: none;
+}
+
+.mode-card:active { transform: translateY(0); }
+
+.mode-card .icon {
+  font-size: 28px;
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  background: var(--bg);
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.mode-card .meta {
+  flex: 1;
+  min-width: 0;
+}
+
+.mode-card .mode-title {
+  font-family: "Fraunces", serif; font-weight: 900; font-variation-settings: "SOFT" 100;
+  font-size: 17px;
+  line-height: 1.15;
+  margin-bottom: 2px;
+}
+
+.mode-card .mode-sub {
+  font-size: 13.5px;
+  color: var(--ink-soft);
+  font-style: italic;
+  font-weight: 400;
+  line-height: 1.3;
+}
+
+.mode-card .arrow {
+  color: var(--ink-soft);
+  font-size: 20px;
+  opacity: 0.4;
+  transition: opacity 0.15s, transform 0.15s;
+}
+
+.mode-card:hover .arrow {
+  opacity: 1;
+  transform: translateX(3px);
+}
+
+.footer-credit {
+  text-align: center;
+  font-size: 13px;
+  color: var(--ink-soft);
+  font-style: italic;
+  margin-top: 48px;
+  padding-top: 24px;
+  border-top: 1px dashed var(--rule);
+}
+
+/* ========== READER ========== */
+.reader {
+  position: fixed;
+  inset: 0;
+  background: var(--bg);
+  display: none;
+  flex-direction: column;
+  z-index: 10;
+}
+
+.reader.open { display: flex; }
+
+.reader-header {
+  position: sticky;
+  top: 0;
+  background: var(--bg);
+  border-bottom: 1px solid var(--rule);
+  padding: 14px 16px;
+  padding-top: calc(14px + env(safe-area-inset-top));
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  z-index: 2;
+}
+
+.back-btn {
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  border-radius: 999px;
+  padding: 8px 14px 8px 12px;
+  font-family: "Fraunces", serif;
+  font-size: 14px;
+  color: var(--ink);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-weight: 500;
+}
+
+.back-btn:hover { border-color: var(--ink-soft); }
+
+.reader-progress {
+  flex: 1;
+  text-align: right;
+  font-family: "Fraunces", serif;
+  font-style: italic;
+  font-size: 13px;
+  color: var(--ink-soft);
+}
+
+.reader-body {
+  flex: 1;
+  overflow-y: auto;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+}
+
+.pages {
+  display: flex;
+  scroll-snap-type: x mandatory;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+
+.pages::-webkit-scrollbar { display: none; }
+
+.page {
+  flex: 0 0 100%;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+  padding: 28px 22px 100px;
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+@media (min-width: 720px) {
+  .page { padding: 36px 40px 120px; }
+}
+
+.page .eyebrow {
+  font-family: "Fraunces", serif;
+  font-style: italic;
+  font-size: 13px;
+  color: var(--ink-soft);
+  letter-spacing: 0.04em;
+  text-transform: lowercase;
+  margin-bottom: 6px;
+}
+
+.page .icon-big {
+  font-size: 44px;
+  margin-bottom: 12px;
+  display: block;
+}
+
+.page h1 {
+  font-family: "Fraunces", serif; font-weight: 900; font-variation-settings: "SOFT" 100;
+  font-size: clamp(36px, 9vw, 56px);
+  line-height: 0.98;
+  color: var(--ink);
+  letter-spacing: -0.02em;
+  margin-bottom: 10px;
+}
+
+.page[data-tone="classics"] h1 { color: var(--coral); }
+.page[data-tone="intuitie"] h1 { color: var(--sky); }
+.page[data-tone="miscare"] h1 { color: var(--mustard); }
+.page[data-tone="matematica"] h1 { color: var(--moss); }
+.page[data-tone="proportii"] h1 { color: var(--plum); }
+.page[data-tone="sortare"] h1 { color: var(--teal); }
+
+.page .subtitle {
+  font-family: "Fraunces", serif;
+  font-style: italic;
+  font-size: 18px;
+  color: var(--ink-soft);
+  margin-bottom: 22px;
+  max-width: 520px;
+}
+
+.specs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 28px;
+}
+
+.spec {
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  border-radius: 999px;
+  padding: 6px 12px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--ink);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.spec .label {
+  color: var(--ink-soft);
+  font-style: italic;
+  font-weight: 400;
+}
+
+.section-label {
+  font-family: "Fraunces", serif; font-weight: 900; font-variation-settings: "SOFT" 100;
+  font-size: 14px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  margin: 8px 0 14px;
+}
+
+.steps {
+  list-style: none;
+  counter-reset: step;
+  margin-bottom: 30px;
+}
+
+.steps li {
+  counter-increment: step;
+  position: relative;
+  padding-left: 44px;
+  margin-bottom: 18px;
+  font-size: 16.5px;
+  line-height: 1.55;
+  color: var(--ink);
+}
+
+.steps li::before {
+  content: counter(step);
+  position: absolute;
+  left: 0;
+  top: -2px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--coral);
+  color: white;
+  font-family: "Fraunces", serif; font-weight: 900; font-variation-settings: "SOFT" 100;
+  font-size: 16px;
+  display: grid;
+  place-items: center;
+}
+
+.page[data-tone="intuitie"] .steps li::before { background: var(--sky); }
+.page[data-tone="miscare"] .steps li::before { background: var(--mustard); color: var(--ink); }
+.page[data-tone="matematica"] .steps li::before { background: var(--moss); }
+.page[data-tone="proportii"] .steps li::before { background: var(--plum); }
+.page[data-tone="sortare"] .steps li::before { background: var(--teal); }
+
+.callout {
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  border-left: 4px solid var(--coral);
+  border-radius: 8px;
+  padding: 14px 16px;
+  margin-bottom: 20px;
+  font-size: 15px;
+  color: var(--ink-soft);
+}
+
+.callout strong { color: var(--ink); font-weight: 600; font-style: normal; }
+.callout em { color: var(--ink); }
+
+.page[data-tone="intuitie"] .callout { border-left-color: var(--sky); }
+.page[data-tone="miscare"] .callout { border-left-color: var(--mustard); }
+.page[data-tone="matematica"] .callout { border-left-color: var(--moss); }
+.page[data-tone="proportii"] .callout { border-left-color: var(--plum); }
+.page[data-tone="sortare"] .callout { border-left-color: var(--teal); }
+
+.callout-title {
+  font-family: "Fraunces", serif; font-weight: 900; font-variation-settings: "SOFT" 100;
+  font-size: 13px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--ink);
+  margin-bottom: 6px;
+}
+
+.win {
+  background: linear-gradient(180deg, var(--paper), transparent);
+  border-radius: 14px;
+  padding: 18px 18px 6px;
+  margin-bottom: 24px;
+  border: 1px solid var(--rule);
+}
+
+.win .section-label { margin-top: 0; }
+
+.win p { font-size: 16px; color: var(--ink); margin-bottom: 12px; }
+
+/* Reader navigation footer */
+.reader-nav {
+  position: sticky;
+  bottom: 0;
+  background: var(--bg);
+  border-top: 1px solid var(--rule);
+  padding: 12px 16px;
+  padding-bottom: calc(12px + env(safe-area-inset-bottom));
+  display: flex;
+  gap: 8px;
+  z-index: 2;
+}
+
+.nav-btn {
+  flex: 1;
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  border-radius: 12px;
+  padding: 12px 14px;
+  font-family: "Fraunces", serif;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--ink);
+  cursor: pointer;
+  transition: border-color 0.15s, background 0.15s;
+}
+
+.nav-btn:hover:not(:disabled) {
+  border-color: var(--ink-soft);
+  background: var(--bg);
+}
+
+.nav-btn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.nav-btn.next {
+  background: var(--coral);
+  color: white;
+  border-color: var(--coral);
+}
+
+.nav-btn.next:hover:not(:disabled) {
+  background: #cc6845;
+  border-color: #cc6845;
+}
+
+/* Swipe hint - shown briefly on first open */
+.swipe-hint {
+  position: fixed;
+  bottom: 80px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--ink);
+  color: var(--bg);
+  padding: 8px 14px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-style: italic;
+  z-index: 5;
+  pointer-events: none;
+  animation: hint 3s ease forwards;
+  opacity: 0;
+}
+
+@keyframes hint {
+  0%, 100% { opacity: 0; }
+  20%, 70% { opacity: 0.92; }
+}
+
+</style>
+</head>
+<body>
+
+<!-- ========== LANDING ========== -->
+<main class="landing" id="landing">
+  <div class="brand"><img class="brand-logo" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAAqyUlEQVR42u1dd3RU1dbf+9w7PZ00CF1KICBNxIdgAoIFQRCYoSvwKKKCig/9bNwZRKUpooAEpPcZepXmJCIgQugJJARCSQjpdSZT7j37+2MSAdsTbPhkr5XFIpncOXN2++3f3ucE4J7ck3tyT+7JPbkn9+Se3JN7ck/uyT25J/fknvxTBO/mxRERJpjjBEi48b24F8MJTTblnur+YLHHxoq/ZDgkSeyeB/whK0IgIkQAKtu1K1zJSBkl5+XEyCUlIISF5Qp+gRtCXnkzEbweIABEALqngN8r5FSuBxmj3GmT3nYlfTtO53WHe71eQABgiMD8/EGOqLFH/+/nXwps2jKNCBDx76uEu8uNJQmBCLM/lObpjn872VtcGF7kcMicMQCVCkrcHl6Yn6/A2dNdy5cuOOZITY1CBPo7h6O7ZuEkSSJaLLx4zbJefukpo7Nzcj0KExSDTi/KoeEfyPe3fU4XUs3LEFk5Mg87fdxQtGj2fCL6W+eCu2LxRIRgsXAiUjvPnHi36MpljlqtAIoCTK3iQZ26bKw1c94y1OudjHMixlRlnDjLzuyWs3ppM7RY+N/VC+6ORSMCAvBLly4x18XztRRRZJyIiaIoiBUVrGTXziOXTN1cuoK8YEGlYsA5AjJSOR0glJT0vivD6d9KAVYrAwColp/fRi8wvaJwr58ooExwIJd7m7lOJrUs3fvlw1ccrmYegjmBKhEAwMsQwZt3PfjvHILEu2IVJhMHACjIPJPMKyqcKAghHs4BieqqZRovNG4WoFKrUMnPLSPi97sVBARgREQsONh9B0EPiQAQke55gC8JAAFg3V5DnaqoOiWiLJOHgIsMoqr7+w0Xa9U879f5sZ0B1aoNNTBsXcE5cCKVRxSReWlr5VP4fwt0ViLBSCQAICEiGa0kWIkEIsJ/tAIQkUCSBET0qKqFzwwOCWaoKLJX4UoZoGx4oP2psKHPry1XeJ6HE2eMeQ1I5A0KORX26uvfEQCixcJ/MckDkAlRsSEqGoZARAabCRUTooKIJP1FaOquKcSICM1mM5rNZs21l4dvV2dc6FTolb2IIPjVqMk8TADP1csEgiALbrcqtHE08Cd69w7u0WsjWa0CmkzKzz0XEUlEgKVZJd0yyh293ESt0OsN1un06TVUcPDZAPVsDAoqtFqtgulnnvPPqIQrNyt7+nQDz7mwzZCdFVdaWACyrABwBBQBAv38QK4Wmo9duk0M6zf0c1rbR/g5co6I0GSzMavRqI2/nL/xKrCuDo8MitcLiiyDWqsFURQhAvm1SNndZ0ijWt/+2Uq467ggkiSGvppALJ338UB3zvUXizNS6zjkkrBqEdGZgWFhazRDnl+krVkzlYxGAW0/z4xaiYR+iMr0s5n7srWGzuUFebKIgMgEARkDLssKAXDQaFVharHk8RDdY+1Dg74zWq2C7U9Swl1JR99CsqnUsPvM0iZJRxemVK8dN3Zox3dmAwD81OYTEdpsNpacPAcv1Y0Tlw6zuJZdynnpNBc+cxQVeRFRQEQi4uVA4AbEapXvpQgGP1Vd8J5+tVHN1iabjf7RCqjazASzWZhrsZCVCKcueTqFy96yN6N2tjcfjlMslkT5FoRjNTKT6UcK0X2QevV4tsIa8QonoSCwwJq1oehyxisqdcAaUS9cV7xekJ0OUgDIT6uBR8P82z4ZHnyMiBgi8j/6c9611SMiUieLRW5qj0VElNWifrmog5b5ba9Us1gSZamSeiCSGACQyWRTiAi/SVr1wPwNL0ywzH94wYyVg9NLXCWNvS4PiWo1A65cdZeXJoJA6UKQp9RdXp4oVzhPoSgCAigqgx9mlDo7AAAk/El78zco3+MAAKBFw8cPcPLi3qPxbQEAYmJS0Go1CogWTkRo3Sv1nbmyb8rRiyuP5JacmxaojzAqgva6w8tcIhKIej0QwFcImv6iAfc7atWSSYT+xOl9UaNFBOQeheO5MrcLACAh4R/Ghv5MGGLmODMHAOjcbthBkjWYXZjeGREh2y9SNJlsStqlM01nrHh699XCAzaHq8QNZBjwXLdZLV8fujPojf5fPBms8yMFgLlLSwkABwF6s3k5mgLP5WsZx2wU2Fqv00GcuKAVRWgd6KcDAIiL+4cqQJIkBhIwXxRCjoh81ChQAQB3OEsTBKbpyTnHl7t95k46ZX9g+7fvHi4uy2mng9o933v+YMtXTNY1tSKan/TIFcxkwgKGdFhtMHAg4jeICMAStcCqiEAgAmQMeUW50tBffbDS7/if8Xn/Mi5IIomBOYElQGJloImFlJhwspgsCoAAAAREShMAyEQUy+bPR5i9ZnhmdkFqSx+SoXqfrTPtdnudzhE9l8XWi4o+BxIwa4wRjUYrmRMSmKVTJ3nZR/r4NNTGFTjKvYxIdBUXAXB8X1Vc+Bb5OmkIgF5dULA6wO1Y+3BY0BHJbhcRUf6fVAARocmEzIIW5Wb+JrFSEUdPfRl95vL22amXvq0zy9qrQVFRsWPasqdSqoe0sYSHRB4r914eQER1P/jiqddlVhLQrOaglvWios8ttj+nHRpX14NoUSrBHTdaSXiuNq5543RGE0NQ8MTy4iIFFZlEQQxDxsIUr1dRiEjlH6AOcDszBlUPeOFNIgSzmf9Z+4F/9uZXMZA7D8+Oyck7+6Qo6B7mRFhSWri5WmBt/4xrB6a7PG5VjdDobckZ9uVtors/k12Q+gBnZQ0j/O9PuZZ/NjossMHI7MIzC2tHtv145DOfvnZrCANmsdxQbFVRNT316iSnWvduiULg9XgAgIAJIgTqtKCucCRURzT9u1GNPCBC+BNZUvwzY7vFV+EGzN84atalrOMDibnVsiIDAIFK0AAKCHoxouDtf3/ZChGvVv2uStTBjBW9XykoTZtZXFTmrhHR4JrTXaq1jEq8/8CZpa0zrpxp5qHSA8Ofir+CiNlWq1GoqgmIiJkTEtikTp3kbwtK/nXazXvIXvkRLydUC+xidb1uU49q+s2IKN9sIP9TCvBVqCZmNFoD5lif23at6Fj7kqIKYkxQ0NcOIyIOHDg36AxCVGjz5eMGrHjebDYRxOVyy9xEAhsqX2wYs+DC9QMjFJmgca24ZKe72OPB7FYq0QBejwsUr+CpGfbAywOftMw7c8aobtbM5vWR3YC2M0aVqZnN82u8839OAVUWuWD9mGlXig5NKMgrdYuCWg1wKw+PiCDLHiUiMkyoE9ph6HM9Ploq2WPFmLwXKTnZRGYz1Z26rPuZS5mn1RHhtQQuM1eQLmrgs099WHzo9AZ+9krCO6Qq7FJarBnzwYtfzQPmB6SUBSMaigCcAACwI22HptvKJ70AZjDGxKDRaAQTAIe/qDmDf1Lch4ycMxHLNr+cmlN0wU/FdMg5B/jBPA8CMEDkgF4I8at3Xhq9J8ZsRrJYgBuNRsFmsynS3E7zSj1XR+tUIa5ej7z56IPNnzn4fagStDAh/vEXAoTsOaaYaiuraR11uap+c+ZNO6YNfjDFres/JyD0oZS7aZboD68DbDYTAwCyH/yiodNdEMBIhUQcVWpEtZqxm78YQwAOTJEBFHTed+p8QluLBbjVahVeeKEpEgFWC4rKDAz0gzoRrQ882LzPQcnaVG2328UzZ4xqr6KA9Hjb+0a1LFJq6I4PEpSzDyvF6wIE5XycyrHhBcocc7js4sSXAQisVhD+EQooKgpmAAD1a7d6WqNVEQCXmYDgkaG71w2NZDePJllo4nVDI67QXrWOARH36LQa0ekpiAYACAsLw7y8FEIEqlPj/lQiAUrLrq8D4AjJYTwuLoE3a7bBU3pxwmy1d+l4uaIQS8pBdrpERYFAcrpEJbfQLbscFw1+qu2flF58e5jJBAqR9S9Xwh9eB1y7lkoAACVlBec9Hg8gMkacgBG8SEAlhIDEvUA++rmJ4uWABALnCtdqApxVz0lOthEAwIrd0sF6NepDZs7+LACgmJhwhmiRyzMXt6TCmS8UOPK9hDoRgYsExIG8nJChgChwMPDCa+mKqBM+dpUk7weMSf+rku+fSEXEcQCAwIAIu1YMQoUrAhCCRsue1BmE/jq90E+rF/rpDEJ/QcQoRQFChiL3qp0tG3T9ysfLxClglgAA4MMxB/ShQTWhXt0HuwIgOBzfMQAAb/GW0VqhABXSIAJHIgKdBliAv1bQqoFxAkDkzCtrIEBXEOi6/nk/BKCkpNHi/3QIslgsHCRgsa0GXo2o1uCgoOIEAF63iysVTll2OWTF5ZCVCqcsc4WISPHqDGoMr3bfRkFQ5fsYTyQLWrjRCMJ9NVtdzsvPOVdcer0VAMHQoZfdRKQnUp5wOJwEwAQi4DotAzfUOeRSdRzp5SGndBoAAuCMCVjhKCXFdf5BIsKLF+fz/2kFAABIIAEiumIaPDKsRrWmwNGtIs45AmOAvi8ExjjnMgpede3INuXP9f5kEucyGo1N6QdQ1aPTBLu0Gm04ERkq0YzIUKim8CpYy0mn1YI2rNfc4OiVXwi6Zsv0OgEAiAMgut0eFHQN2wEAmEygwF/YmPpTFGCxWLjVahViWw5L69p2zJDa1WMy/YK0KiZypnA3EniRiZwFBhtUdaq3TIltMbq7DnWV8fnGuElu01gEYKBRabdrdapGh09tqJqKkznIWaLACJAIgDGH0wme/K1SyfkXpnBXyitlDhmAUCDipNNpSXYkf8UEDRFVMn//q0m4SkwmkyIRsAewx0qn0/n1uoT/G55++VR3wSDGcPI6GRPONqzdZtOAx6fNQ0SHRNKPWoJxAJAIHLLz0tI0ejXN3vCCB31e4Sw8Y9xqMOijK4q9ioAouj0AGnV6A637yhtO8oLHi8AQUOGcVGoDqoTmR4nbISlpFAOY/8858mS1Gm+CfgIQUT0iioSbYHllm/FHYrdLIgDA5q+mjvpk3RO0bt8HQ6p4popsa72Sky08hYeDvTmHaii5hyIp51CkknsowptzMJLnHYqknEM15KLvgpSik4+UludkRBIB/pVTcX9JQ8ZksimSJDFJihUBFETEDES8DqAwyR4r/jDs3OIBcT6WU2+ITMgvyKdT53fXAAAICTms0lXvl0G6Lu8Gh1QXBXQxTlwGQiBgDBG5QlxWMafgH1yfqUIHjfeLqHcdbEZ2N8yH/qVCJLFfa4VEvmT52vT7Da9/2pJenHLff3weECsS+TyrKP0/r1ckt8mXz9ahsmPVqPRoCJUfr0by2brkSn34WunV2aN93hQrwj25bV6JSXZJJKJq7y3oWjZ9ae8DdonE+PhRKiJCqqQXiC5EONMHTChLHfBN2cXnksvTBn3luTzmZSouDgEAoFvC4D351Z5y8/9fmtpw7Ruz2p6/Nb9YhSpP8IkegBkAQHfjOXfZ5v8t3FCSJFY5fqJbtes//csdZf2uXk+O0xu0mvkbx3wWbAj7um9Xy2ZE9HyvrIQEBp0SFeS+fgBQrACQoCDiXYV48K7ffJLYJDaJHzy2Je6b5HmfqwRNfST9Pp1Gn6gS9c6svHN1aoZHP83R7VGJhkWDn5g+CxGVv5rj+Z8QSZIYECCVlUV8usbkmrGi+yEiql0FWXWawO9fu2bHu20/WdVv6ZJtr+05c8budzdAzL99CIqJSUFEgc+1vvxWhadE9fqQL3sjYjYYQZC6dhqkEoVp/obgE9G1O654/F/jVgDAcyu2vfHOyat7ZsfE0HCbzYYAcFcXWXf1ZJzJZCMCgqKSrJ5aMeIrALj+0UdGHdhAiQqN7gPq4ois/JOPJ55Ysvxz24g1aWmkGdx96mQ/XYhh4573GptMJkX6heOrd4OH3I4C8M8PQQAAHPKKL8uiqHIiIoW01hMR4cDHpj/fvFbfV4O09dY4HRWUXXyiX9JFqZfVahROp+1dlXBySSXasfzoc1itRgEkYL5zYn8MKrqd+ubXUAf4YxrhT6FRGYIKZq7od+T9JbEFRNTgxy/SwEfLjAffXtDUM3O5aToAgG3v5Oet+95p/H0e+UmLF4CIQv+E2gV/wy/7Np6BBrQq/999YVarUbDbJVGyx4qSPVa02yXRbpdESfJZj5WsAgDC/uMrjR9bH6O3Zj90dsv+aQMzcs5EEpGOiPT7j654zbIgrnziF21oxfYJ/XJycvy+OrxwGhGxm68xqDIeIsIl28YNnjivw5czlvcunb60zzwrWYWqz/q7AAcAOHpqSzQRBf0St3VLWCEiTEhIEDp16iRXbb7ABFq364PY9OwDHwiiEKVXV3vz+b4L1gOYZQAz3QnMkySJpcRY0Gb678nRaAWhKRiF9/pt8KzaPvGVlCs7J+sDRUNOVpHXoA0u5ySDDOXBwDwQGdg64dVBq/udSN3zjttbtvCh5n1OEUkIYCZzQpxg6ZQop109WXN/0rz1F68ffrDC5QCnwwHVa0RBs1pPD+jT5e01Nw903anBmkFCM5jx09WD0wQV5r7Yd3ksInokkpjlJziu71FQ5WbKNxc+e48vjDp8fMXuckfJdVHQfRdYT7Vq9ZcT3x345HuTJTuIVa//lctDo9XEfMO3vtMrSefWPlThcj544lwCyNwNUZEN0F8TmV+mXNpnfGRGMSIWAfg2pH836ZPDh7etOZi+dEid6lEmp7s4ssLlUOpUf6BArw5a3KXdmH3nrxwZIIrata2iHztJRMxmM6HJhBwA5D2HFvTbmPDmp9dy08JlDyiCIIBKpVO8HoUF+odHAQCEhTX9TV7gu+oIEAB4teA6s3LKjsz6ZLVpBxE9hYjun1KCWDULWVh4IfB6SVY3p7p489b5SS4AgFNnv+wtqkE19mnbk1GhTVPiNw7+5ErJkfFEFI+IebdX7CDZTKAcOLUuOiV950uTFz3a1eN1NmICB1nxAAFAkfMCyF4FOBf4hYvdsj9eZdwXGlhr45BuH+1DxLJ27bpfB4DpGpVhustTjipRQ155PyIiZdEEfaPQxodvGBASAHAiMizd+sqHXx2Lf9HhLGLARUUQUEAAkhWZieSPkaHRNgCAhITfPpKOaCGj1aaymc5+uj9pFT96Yfln05b2+IqIHkVEd9WI5vevjz8arxr9wGiv/ciil9Ku2T+7Vngl2DIssZiIcPWXb207mba7+ZRxR+sjIp2/dLTFoQufJbmLtY+N7BO/59cc6fTdfoWQmZUS8u25ddLJ9N0j3XKh1uXygOIlAgQFkX3/4kpkJiDjoNFqQCVoIVBfPbtmZJNFcQ8Oja9ZrfnVH4RQHDurgeqzl9PdRiMITV+IxZS5iWSzobJs+/jO1/PT4wvLLzYoK6sgAUUA9CVFTiRrtCi2qN9j9ZDu0wfbbIgm02+rGXwDXwL5hr59dnki/UD4lsQ3Dxi0QZfHD9zcDRE9NytB3HtxLwcAuJ57eXdO7hXPQ80HNTcaEw8iorJ40ytlsuJVqmbla0bElKovRM47cHZlii+7//dDbDabjYEJlCsnUtpfKvh6bE7eJdKqDQqgiIIADIDEH2ckn1d5Kjh3URmUOUqql7gy307N+O7FBRtHrmzT9PFNrRr1OSSgxsFBoc9eTncjqMFmUxSw7QcAFaz6csIXaVn7/p2fnwtIKkVgonCj84icibJYPaRl4ZDu01+oPG9Ad4q0iSSWkAAM0SIvWDdq1PnrX7fyull5oF+YeveB6eUNa8SdyXF81+v9RV22ElFPRPRUTechASFKiGQmzaerB2Sq1fpzY/ouedigCwTL/E7HK1wVEe+M2FHTbI5jPziZ+KvFaDUKVqMV49ePtmbkHHzGWeZRkOFtQFokTooCwEW9QQt6TTDIXkhvWKd1gcNRcfbcxf1J/2rZt9+1/DRVfskFaNGgy4Vm9TusXbt38rzS8sJwIoFVzaEiMq5wFw8KiCjvdP+opx59ePjBn0uQd4DsNEu2jN9S5sqMrajwEHGFKVwROCkVHq+nUOfHawfrGtmf77uga+XIJYkISMYYI0PECtvuSSPPXt2z3hzfMVGj8g91w/WmkcEt3qjszVYtkFmtRrwdtNDU2JQqCbJXZ67s80B6eVKUiDoOv3g/g2/T0ecOhIjAQKW4HF5eXnZNUKmEBsdTdzQQBNZO6y8OPZyyBhgTwe1ywaXC/e2aN+wYL6DfKZWm9HG3i3P0nYQhl6eMN6jXVGxRt++bj7YfflCyS6IFLfKdQmlEpPUJH7TtHftm+rx1I+PdnopzLw+0dq/0Z+VmsLPv0MJhSRlrPl+0cVwfiwWskhQrMgAAm8mmWK1GwfjYxA0tG/TsHxQQXg0ERY4KfHD8yL6fTyOi6it2vfTwsm3j2xPR90dCf+1CLWjhdrskIuLlds0GDa1fqxmTFRfHX3B5Ai8GBulFP3+9EBTkJ/oFqEWm4gIwUAkoEnHmIVl0e93oqihXXIqXeVxON0VEhIGB17WG6OoXAqto43Z7OQIiAHJZcWOdmo3Eh6KHvv9kh5fmxcePUlk6WeQ7zre+2KU9l/71wk/W9E0rdmT1UKv9lyCiF+OQo+8iEI6IbkT0dGk/Yh73qPdnF6ZPBGBggUQu3sS7KJIksadj/7MWgK0FANCqDoB177uTJn3RebRe6xeOyGDe+ufSzpw/+BQipv8wo/+SdOpkke12SezQyvTVqp3vjM0vzPysvLzcy5hKdctUCAGhQFjNv3ZWg1qtZgcHRl2Sve4apy8kiv4i9iwouxajDWCBiuIVbs7FKlENahZUFFOv/UfPxL63fd76IbuKy/JCkUQizjkIshAcGFFaL/Sh/h1bD94JEmejR8/33jmPLxAnmQGAN6ZBl0+On7ctLC0rhtCgqLdzijImRwTXO/H9JwIASYoVAOJ4gyjMuJB1LAqAg/RT/I6vkrOJZrNRXrKl5LOCijMvyLIC0TWe+qRu5IOfHzq70FZeXub8z7PrO5hsJrDdZuFiNIJgs4Gyeuc7685c3danpNAhM0EQgahquYpKy4Tomo/sK68oXgGC62kVCyjm5NjSte0IRaUSMk5eSIi+lnO+/eXsdGDAoEmDNtS4frtv/9X0maydBxd1TDq74438ksxgrjBOXFZUGlTVrd6mrEW9px+PazfoUKwEYqIF7sjyq4q1uetGfKzwsscHd5338ImUTZGnr+6zagTD9lLvlf8rLyunBjXbTRvcbfqsZdvG93NUFLd4wbRkmCQRM5tJyMm5GB0Zed/pnyTYqrLz/lPbgvcemlJYM7zF9EBD+LWsghPvvNJ/Q9TqzeZqZzL3nC/OK46Ya0kpBwKE25i1JyIcPf8BMX7UUXHW6oGbruQmPeZ1g4yI4k2vAZVaBK1O9J3nQgC1Wg0C6kEg7cXqYfW+1AoBCVfy0jIAvBBd5+Eu6Vnf1SopLeyh0sm1CguLgYFK8SgujIgIZRGBTfd17yC9WjvyvtN2uyR2uvOw870C5q0bNd3LS2Nr+Dfr6YbSkMHdPknmJMOJlJ3NEk58MRk0ZT0dxSgHhapEudx/5suDVo6XpFjxh0AGf/wGPmyfcGzFk9+cWLi1mt+/6owxTcv61No7Ra8OSdKoA89fzk6yxLU3B7y9pkNF4xptsPq17sqvDUU3K5nojHrqkte/yy1Jb+F1o4x4ozL3TTYDR8RK3M6JE2eigExv0AAAAqLgO4AEHAgInE4PcAVlBkAgyKpqgbWg2X1dpvfu9M5ERHT9VqrhZiMSRTUJqIHP1w2dUuw5+0awptnMYU9/8lolpMX9Jxc9df7KkTe5ggdG9Jo7EQDclYmjKnnzn2zIGI0mDgAYoav7DVeQA+WZAOSZdUIe6H/uWsJJEsohyK/exA5NOpQBACRCEgAkwe14AiKQlawCYjNPcfG1fy/Z+fK+9KtHAgHUMgITKx/GAG/Q5QwZMBQACMhR7lWAoPJCFQRAIAZIQAyIPCqdvx9EBrY417pJn9Gxbfp/DfAu/J73AFVV/wp4oWXDuM+/PnHdL085/urMVcZ2mZnn+1ceMNzGQLuNgwtGwuc/+fs/2Q9ABJKkWKFpk45l4UF1Zyhi8cdHkrd269nljVMGTfXx6A78v5f6rX5vxe7Xey/cNG7f4q1j59m/XV4TkNHtICMTmhSr1SoEBdVI6tTmtSei6z6co1KDqHAvBwLlpxESAQAhAoqIKDAUBESGQIAy96i0BlFVKzLaWTus7bhXBllbxbbp/7VvZojw99h8n/VKjIjYyp0T3pprHT65TUzfyxOGbHuphv+/hjhcee0X7x5x3LZv6gAAgI6SSzRajb94J93P/QAlCfC9SSL/YPFjK6PC7m8/uNuHDSuPcobNWTdkbakzuxNT9EkoMINWq7mvea2nunZu/1zi7VpaVVgoLS0NW7z9+Vn5pRcGVLhLwOnwAENBQYaE4LtliYCIiHOfHggVLjO1RkS1RgNBhqjS8JD7lj/xr9c+rRl+X9rNz/69KPRYKVZMtCTKG/Z8MDsj/+CLqOheGj/YNqfq54dObGv39ak5c0DlaBPp/+DUZ7tPf9MsId58bvlXd7mq4rTAVJB89VBodI0HChgT6KMVpm0lrvSn/DW14N+95j8e5Be5e9qyJ5dxTk3feG5re5MJFZvt9jgVIh/7CsBg54E5A06kb+rtdlX0disljJMMnHMoL3eAIAig1+sAK8ORRgiGkMDqx3WawLnPdBz/ZWhoo8wqGttqBP57HsQjkpjZDGA2m4M/WtnrkkiBY14ZsmxFvuNqzclL26jbVR/rHfDMu1eJyG/pjhc+qnB4vxtjWrhQkib+IlS/LfJj79efNz16ed3pumEdXssrvhASGKJ9d8hDC8LfXPxwq/r179s1svuyemaz+UpcHDDfHOctPQOUJPhZa6i6wsCnPAbHUje3yMw52z0rN7lu2qUkTdP7OnZzVpQWZuamJLRp+jjjBPvbN+t7ukHtDsdkxfU95dE0uSndDiD4Nf0LC1gAKtdNRDXmrBt4Pis3NSFQG3VNrRdHuLyFwD2CKyosptOwnp99e3v1xK94TXz8KHH06PneRetf6VzBsvY1rdWtSacHhp37YPFTCxijWATSudyeU4803NuzU6dbL7nw3YaIOMkicvoV0NtqtQrJySb6oaKIyA8A3Ijo/fEmxYoAcfy3bLzku6EFbn7fG3S7AKLAwCt7RESU1+6a+FxWwek5bndFeYC+xurm9Z8+sP/03Gl+2rCScQNWtDYnxAmQ8NvW85N9zdzc3OrTV/TwzFjZd0oVgHp3bsdF05Y/4f762PKmAABfHpzdYMwHkW032ie3VIt68F09I8DSrRPWxq8fvZyIRCL6rzM7RBKralXGSjfQmiT5vmf1JbffeaqD/ai1uGnfzMaz1pj2Tl7UtXTash65y7a/9pJa1AMRhRCRxtddNsDHq/ucnb/++V0Cqn03wfyec0GISJIksfDw8Owv1r00ysmuLl66Y4wzJrzr3LZtew7fvHum+ZHWz16Zaxv26dFU21g/faTjSv4Rw2zbQNvzvZeZNtk/HHYuZ4upmrbFBgDgNpuJ/bfkWDmizn9oBIgo3xh0wN8nxFgm8XkbRvYO9gsfGtd17MBwmOsEsNBDneOrJ1/d8pWfPrwoKvT+JRezjj5S4D7x2Rzrv5sg4osAwLYdmNX+etHJhWVlhf7Vqz80XJk4j4H5DxhLsVgsXJJixRF9Zy8JVDUeioL8lkft7UhE8HTX164s3fraglI5bWyArsacEU/Obdwg4tFnShzXe2xJnDrjTMaueYISkjS856xnTTZEAOMdYe8/YtQwJSUFiTjKXu+Q81cPdwuHcDeihSMCHb+w+W29Jlg/+plFrft2eWfchGc3tg/WxOzNLk4a/c3R1R0BgGtFfVOtOqCocWSfh3q0H5olgQS/Zw762a4/EX0/F5hZcLrW+0s605TF3VcBqL43zRlLjC9PX9OZJn3RufhMauKDP/Wcv1J8ofDGYe2Lmd81Ppq6bujZs5v8iQDHf9R812erh6UBAEjx3fUAABnZZ+tOXd5VnrrkmbdueKYvkNxO6LmtEPRjTwCGiCV2u13s1KmTbD+0IhZAViqKy94aFe9VVYc2KsvoJKdHcTVDxQ2tGvZ5sVnj2O8Wb3yj7qnMlf6vDjhYWDu0dtadbJjZHCcAJEJMjJF+K8av9CglJycj8mDKpuiT6d8ouc79iwOgWaMmTfCt6csbXS90pLa/lH2uXt3q0RkAAHUjo/OR1KX+fqE1AADizCgAgCJJEt5JU+eOrNBiAe7TfAIAAIQER5WLKpXQ7P7HG80fDV7L6CTnpn0zniZV0QiD0HB+90deXbV+r+WVa8VHUoI0Dezrdr96ZfpyY19EvC1PQESyWBJliwXkO938qqk4AID9p9bVz7x+7lGrXZpzJfcbe6/YV9OKcynpUt7hcXl53L9OaIsPAFHYnDjRfiLd3oyIgqYt6/EUEzG4RlDd+QCAL8YYCQDuGPqy32I9cXFmhYiwW/uxu/1Vdc7nlpzaNWNJv1Ezl/cfnnx1x0aNUO3k2H6LXxOYmi7nnLXkF+YdnjjSHhkeXH9VsH/ERMZUt2TTmzYHfRTC9+EOK/8Nit8wYsF/ZkXvnb3m2c+JSPvDKWhfWLkxFlg16HVz3wMsAgcAyC+4OGnjN9I2R0VhxyBDjV4AUNSl7ZjxCjk0K3YNmtXvyUmpjWt0GVfmzK2569sPT8/bMLSIk7zaUeLt1bPL26ckSULTX/1H5W7KCXVX7Z6weMm2sRc+WtWd3p77kOebkzsbg+8PLQgfLnzK/OGyRx2pVw+1E1Bdhevhpok0rLIJBppbnl8JOVXTl/ZZ8cm6bvTRyt6fL946/j0i0tw80fZLc55VnMwG+5SXlm5/ZTkR6TKyTkVPWdaVXv+kzXHfm/kMcq51xPKZ656ghO9WtQIASMs4+tD8jcNembHy6fHHUnbEVtUrcNcI3TJhJy7c8mLO8u1vvHUzTCwmCpll7XN5yuLuF+xkF3+I+UVBBTsT5v0rfsOwbV9sGXVx7vrBnx8+s63lDd2o4d25HeiLjWM//ElDqPQWrcYPiCiKiMKISNx7JH70sq2vNasaTfxi47jZn6x/ghKSVjcBQJi7dpR1yorOrtQrRx6USGLx8W1U+Y78qEkLO2TNWNEriYiCf6qp9PtXHr8pmwFVHT1FRD68x+zmg7tNmQVA+NGK/m/uObzg/4IQCx+OGTFB6y/X54cvGn3MolXw0dIWvvfwUtO5nG0Hs3LS6+rVEcfLyosfSTj22YFN+yY13nJ0nn7qkqf2u7xllF9yueWHi54csWvXMkOVB1mtRsGCk/jy7RPMHyzqmrl018jM+HWjzgBAre9Ob5yTmZs62WRapwAAhAc1mF1aUiafTt/dGYBYx5Z9JYaCZveB2cMtaOFqdTMh1BCaVT2k9ccGP3Xrk6k7Y6xWqzBrxyyN3S6JVqtVuF2u63dFQb+EjqoKJ0TMrTRbclaU0vnsXR8u3DS2rT1pQV21TgNRkQ2vEBHYACDZbCIi0k9Z0s3MmFBqef7rBxDRRURs8qIu+ecuH5ld32/IE7LivqxSqTu4PY7qIf5Rg5s1e3SVb+7IyEymdcqURb2mZeQenAAe/cT6tVpnXilKK0HEjJkrBuwpd+fFEfFARCzpETc27eT57a4KV8mzapV2zv2Nnzj73oIn1pXK50xENAERy61Wo2DsNWv+kXObt7WM7pZaSUm4/4jg8Ydg8UqqAYgI3x25Y0qgprHJqzjuV4nqgOqB7YZH1409IEkSM0IyWSzAj5/fWVdQy01UQsD7iOiaMLW9P5oRuJd2lDjyWppMJqVeVKsVgQFB0LJ5j8fHDlgWFxUVVeGjvm1Kasa3LVX6igl6DH974ug97/V65N3F4wYs3wCAUDO80WaDvxCYeHxp+0q+RwjwC9vicBU0d3sq9AQcO7bq+2GNmuHBizePewcAKDk5FxGx7MEmvVJ/2ED5Wyigqmr1URjABj35vu35Pisajh+4saHpsbcWAxBYLBZeVbGfu3oQZcULZY6CZABA+TqX0SJwQNZEpw1wAwhgP7zEAMAoWBcRaDSCIJGEyWHJCABwIm1nC4ezTEk8tnFhfHwbldVqVO/YMUtDxDG2/bDNjnI3pF9KGmyxMI6IXn9dSIZKX6HZsHfyIwBAj7QZdq5GwENvalX+NgAAszlRISK8k8LqrpSbDnmgJEniD/gdJKKaM1b2cM+1Dd0vMgMAABw+s3noR9bO9MWmsZ8BCDDXOvLzOeuNRETRlb/LpMq7I3Yfmtd7xpoutGrH289VMpu3vMfkBd12TV3RhdsPLe0Qv35Q6+nLe6bGbx1An6wYuNSXVf+6++P+8jNSvtsQ1ynbEj6eeKVkv8VZDIdFUXtR7ecakJdb9M2zXSb2qFevU/HCTS/ZM/NONZg4IrE5AJbcNOcJABQwaUHnC2q1umJk55UPhdaOzMrIPl03K/e0pkMLU+rBMxse/ObkF1vzCzLDw6rVhCBDnanNGzyx++yl/YXDus84UTXbmZAA/A/lce5GBVRByEn4Pv/ymzmPHb+4+Rl3hadmjYj7jozoOW8mIpYBAExd/PThkrL8kA/GHWx48/XEVS3QLw/MHX48fcOnFRUenVYdkKHTq+/TC6FTRhvnvwkAcOzYjrC0wsSHtOqAC70emZhylx+e/Ku98UZEsFZePWDdM8li2zNppi/B32o4vmIQwZ5kbbDePil+7a63t3++flhfu322X2XY+2EsR6vVKtwNhOD/A6kx+mx8GTWjAAAAAElFTkSuQmCC" alt="Seeds of Curiosity"><span>Planting Seeds · Seeds of Curiosity</span></div>
+
+  <header class="hero">
+    <h1>Animal<br>Quest</h1>
+    <p class="tagline">32 de animale · 16 moduri de joc — numere și viețuitoare care prind viață în mâinile copiilor.</p>
+  </header>
+
+  <div class="intro">
+    Jocul ne dă prilejul să ne împrietenim cu <strong>numerele</strong> — dar și cu <strong>animalele sălbatice</strong> care trăiesc (sau au trăit) în România. Copiii descoperă mărimi, greutăți și proporții, învățând să compare, să estimeze și să gândească logic, într-un mod jucăuș și conectat la lumea reală.
+  </div>
+
+  <section class="category" data-tone="sortare">
+    <div class="category-header">
+      <h2>Sortare &amp; Strategie</h2>
+      <span class="count">2 moduri</span>
+    </div>
+    <div class="mode-grid" data-category="sortare"></div>
+  </section>
+
+  <section class="category" data-tone="classics">
+    <div class="category-header">
+      <h2>Clasice</h2>
+      <span class="count">3 moduri</span>
+    </div>
+    <div class="mode-grid" data-category="classics"></div>
+  </section>
+
+  <section class="category" data-tone="intuitie">
+    <div class="category-header">
+      <h2>Intuiție &amp; Estimare</h2>
+      <span class="count">3 moduri</span>
+    </div>
+    <div class="mode-grid" data-category="intuitie"></div>
+  </section>
+
+  <section class="category" data-tone="miscare">
+    <div class="category-header">
+      <h2>Mișcare &amp; Bluff</h2>
+      <span class="count">2 moduri</span>
+    </div>
+    <div class="mode-grid" data-category="miscare"></div>
+  </section>
+
+  <section class="category" data-tone="matematica">
+    <div class="category-header">
+      <h2>Adunare &amp; Scădere</h2>
+      <span class="count">3 moduri</span>
+    </div>
+    <div class="mode-grid" data-category="matematica"></div>
+  </section>
+
+  <section class="category" data-tone="proportii">
+    <div class="category-header">
+      <h2>Înmulțire &amp; Proporții</h2>
+      <span class="count">3 moduri</span>
+    </div>
+    <div class="mode-grid" data-category="proportii"></div>
+  </section>
+
+  <p class="footer-credit">
+    Atinge un mod pentru a citi regulile · glisează stânga / dreapta pentru a trece la următorul
+  </p>
+</main>
+
+<!-- ========== READER ========== -->
+<div class="reader" id="reader" aria-hidden="true">
+  <header class="reader-header">
+    <button class="back-btn" id="backBtn" aria-label="Înapoi la listă">← Toate modurile</button>
+    <div class="reader-progress" id="readerProgress"></div>
+  </header>
+  <div class="reader-body">
+    <div class="pages" id="pages"></div>
+  </div>
+  <nav class="reader-nav">
+    <button class="nav-btn prev" id="prevBtn">← Anteriorul</button>
+    <button class="nav-btn next" id="nextBtn">Următorul →</button>
+  </nav>
+</div>
+
+<script>
+const MODES = [
+  // ===== SORTARE & STRATEGIE =====
+  {
+    id: 'targul',
+    cat: 'sortare',
+    catLabel: 'Sortare & Strategie',
+    icon: '🏕️',
+    title: 'Târgul de habitate',
+    subtitle: 'Formează prima familie din aceeași casă!',
+    sub: 'Trei animale din același habitat — primul câștigă.',
+    players: '2–4',
+    age: '6+',
+    time: '5–10 min',
+    extras: 'Nimic în plus',
+    steps: [
+      '<strong>Pregătirea:</strong> Fiecare jucător primește câte 3 cărți în mână. Pe masă se așază 4 cărți cu fața în sus, formând <strong>Târgul</strong>. Restul cărților rămân în teancul de rezervă.',
+      '<strong>Tura unui jucător:</strong> Când îți vine rândul, scopul tău este să aduni în mână 3 animale care aparțin aceluiași habitat (de exemplu: 3 animale acvatice/de apă, 3 animale preistorice, 3 păsări etc.).',
+      '<strong>Schimbul:</strong> Pentru a-ți îmbunătăți mâna, ești obligat să faci o acțiune din două: <em>Iei la siguranță</em> — alegi 1 carte care îți folosește direct din cele 4 expuse în Târg; sau <em>Riști la teanc</em> — tragi prima carte de sus din teancul nevăzut.',
+      '<strong>Decizia:</strong> După ce ai tras a patra carte în mână, analizezi situația și trebuie să decizi pe care o arunci. Cobori o carte din mână și o așezi în Târg, peste una din cele 4 cărți existente, schimbând opțiunile pentru următorii jucători.',
+      'La finalul turei tale, trebuie să rămâi exact cu 3 cărți în mână.'
+    ],
+    win: 'Jocul se oprește instant în momentul în care un jucător anunță cu bucurie că toate cele 3 cărți din mâna lui fac parte din aceeași familie (același habitat). El câștigă runda!'
+  },
+  {
+    id: 'raul',
+    cat: 'sortare',
+    catLabel: 'Sortare & Strategie',
+    icon: '🌊',
+    title: 'Râul cu animale',
+    subtitle: 'Fii rapid și prinde cărțile care plutesc pe râu!',
+    sub: 'Varianta scurtă pentru exploratorii mici.',
+    players: '2–4',
+    age: '4–7 ani',
+    time: '5 min',
+    extras: 'Nimic în plus',
+    steps: [
+      '<strong>Pregătirea:</strong> Se împart cărțile în funcție de cine joacă: exploratorii mici primesc câte 3 cărți în mână; exploratorii mari primesc câte 4 cărți în mână.',
+      'Se întoarce prima carte din teancul rămas cu fața în sus pe masă și se plasează lângă teanc pentru a începe jocul.',
+      '<strong>Tura unui jucător:</strong> Scopul tău este să aduni o familie completă din același habitat (3 sau 4 animale din aceeași zonă). Când îți vine rândul, te uiți la cartea de sus din pile: <em>O salvezi de pe râu</em> dacă îți folosește cartea lăsată de jucătorul dinaintea ta — o iei direct în mână. Sau <em>Tragi din teanc</em>: dacă nu îți folosește, tragi prima carte de sus, la noroc.',
+      '<strong>Decizia:</strong> După ce ai luat o carte, analizezi ce ai în mână și trebuie să arunci una jos, cu fața în sus, peste cartea/cărțile anterioare. Astfel, tu rămâi mereu cu numărul tău inițial de cărți (3 sau 4), iar următorul jucător are o nouă opțiune de analizat.'
+    ],
+    win: 'Primul jucător care reușește să își transforme toată mâna într-o singură familie din același habitat strigă numele habitatului și câștigă runda!'
+  },
+
+  // ===== CLASICE =====
+  {
+    id: 'mixup',
+    cat: 'classics',
+    catLabel: 'Clasice',
+    icon: '📏',
+    title: 'Animal Mix-up',
+    subtitle: 'Așezarea după intuiție.',
+    sub: 'Cine ghicește ordinea, fără să vadă cifrele.',
+    players: '3–6',
+    age: '7+',
+    time: '15–20 min',
+    extras: 'Spațiu liber pentru aliniere și o hârtie pentru a ține scorul',
+    steps: [
+      'În cameră se alege punctul de start și direcția de creștere. De exemplu, la geam vine valoarea cea mai mică și spre ușă cea mai mare.',
+      'Toți jucătorii trag câte o carte. Își arată <strong>animalul</strong>, dar nu și valorile.',
+      'Jucătorul de la rând alege o categorie de joc. De exemplu durata de viață.',
+      '<strong>Varianta 1:</strong> Jucătorul de la rând îi <em>ordonează</em> pe ceilalți în încăpere după animalele lor, după valoarea pe care o intuiește.',
+      '<strong>Varianta 2:</strong> Toți jucătorii încearcă să se așeze pe rând, fără să vorbească și fără să-și arate cărțile, în ordinea pe care o intuiesc pentru categoria aleasă. În caz de opinii diferite, doi sau mai mulți jucători se pot plasa pe aceeași poziție.',
+      'La final, se întorc cărțile și se verifică ordinea. Fiecare jucător aflat pe poziția corectă primește/aduce un punct.'
+    ],
+    win: 'Jocul se termină după 10 min sau când cineva adună 12 puncte. Câștigă cine are cele mai multe puncte.'
+  },
+  {
+    id: 'razboi-mici',
+    cat: 'classics',
+    catLabel: 'Clasice',
+    icon: '⚔️',
+    title: 'Război pentru cei mici',
+    subtitle: 'Clasicul.',
+    sub: 'Tragi cartea de sus și speri să fie bună.',
+    players: '2–4',
+    age: '7+',
+    time: '15–30 min',
+    extras: 'Cărți Animal Quest',
+    steps: [
+      'Cărțile se împart egal între jucători. Ele sunt păstrate cu fața în jos în teanc. Jucătorul cel mai tânăr începe; apoi se joacă în sens orar.',
+      'Jucătorul care este la rând trage cartea superioară din teancul său și alege apoi o categorie de pe cartea sa (greutate, viteză, durată de viață, lungime sau consum de apă) despre care crede că îl ajută să câștige. El spune: „Greutate mică" sau „Viteză mare".',
+      'Toți întorc cartea cea mai de sus din teancul lor. Valorile se compară conform regulii rundei.',
+      'Cine are cartea cu animalul cu greutatea cea mai mică sau viteza cea mai mare (conform regulii anunțate) ia toate cărțile rundei și câștigă câte un punct pentru fiecare carte. Cărțile câștigate sunt puse deoparte.',
+      'În caz de egalitate, cărțile rămân pe masă și câștigătorul rundei următoare ia toate cărțile.'
+    ],
+    win: 'Jocul se termină după 15 minute sau când un jucător a adunat 16 cărți. Câștigă cine are cele mai multe puncte — deci cele mai multe cărți cucerite.'
+  },
+  {
+    id: 'razboi-mari',
+    cat: 'classics',
+    catLabel: 'Clasice',
+    icon: '🛡️',
+    title: 'Război pentru cei mari',
+    subtitle: 'Clasicul, cu mâini în mână.',
+    sub: 'Vezi cărțile tale și alegi cu strategie.',
+    players: '2–4',
+    age: '9+',
+    time: '15–30 min',
+    extras: 'Cărți Animal Quest',
+    steps: [
+      'Cărțile se împart egal între jucători. Ele sunt luate în mână. Jucătorul cel mai tânăr începe; apoi se joacă în sens orar.',
+      'Jucătorul care este la rând alege o carte și o categorie de pe cartea sa (greutate, viteză, durată de viață, lungime sau consum de apă) despre care crede că îl ajută să câștige. El spune: „Greutate mică" sau „Viteză mare".',
+      'Toți jucătorii aleg o carte din mâna lor și o pun cu fața în jos pe masă. După ce toți jucătorii au ales o carte, se compară valorile conform regulii rundei.',
+      'Cine are cartea câștigătoare (conform regulii anunțate) ia toate cărțile rundei și câștigă câte un punct pentru fiecare carte. Cărțile câștigate sunt puse deoparte.',
+      'În caz de egalitate, cărțile rămân pe masă și câștigătorul rundei următoare ia toate cărțile.'
+    ],
+    win: 'Jocul se termină după 15 minute sau când un jucător a adunat 16 cărți. Câștigă cine are cele mai multe puncte — deci cele mai multe cărți cucerite.'
+  },
+
+  // ===== INTUIȚIE & ESTIMARE =====
+  {
+    id: 'cat-aproape',
+    cat: 'intuitie',
+    catLabel: 'Intuiție & Estimare + Uimire',
+    icon: '🎯',
+    title: 'Cât de aproape?',
+    subtitle: 'Estimare cu ancore din lumea reală.',
+    sub: 'Cine intuiește mai bine, câștigă.',
+    players: '2–5',
+    age: '8+',
+    time: '15–25 min',
+    extras: 'Pix și hârtie pentru scor și eventual o listă de ancore (vezi mai jos)',
+    steps: [
+      'Cărțile se împart egal. Fiecare jucător își ține mâna de 4–6 cărți ascunsă.',
+      'Jucătorul de la rând rostește o <strong>ancoră din realitate</strong> pe care o cunoaște și care poate fi ușor confirmată. De exemplu: „bunica are 78 de ani", „covorul din sufragerie e de 2 metri", „mașina cântărește 1.200 kg".',
+      'Toți ceilalți aleg, în secret, din mâna lor <strong>cartea cu valoarea cea mai apropiată</strong> de ancoră, la categoria potrivită.',
+      'Cărțile se întorc simultan.',
+      'Cel mai aproape de ancoră ia 1 punct. La egalitate, ambii iau câte un punct.'
+    ],
+    tipTitle: 'Idei de ancore',
+    tip: '<strong>Durata de viață:</strong> baterie de smartphone 2–3 ani; garanția extinsă la un televizor 5 ani; cât timp petreci la școala generală (clasele 0–VIII) 9 ani; vârsta bunicii 65 ani; o pungă de plastic aruncată în natură 100–450 ani. <strong>Viteză:</strong> lava unui vulcan 6–10 km/h; sprintul unui copil 15–20 km/h; trotinetă electrică 25 km/h; autobuz STB/CTP 30–40 km/h; viteza maximă în localitate 50 km/h; tren CFR personal 70–80 km/h; autostrada 130 km/h; elicopter 100 km/h. <strong>Lungime:</strong> palma unui copil de 9 ani 12–13 cm; ecran de telefon 14 cm; pas mare al unui copil 50–60 cm; înălțimea ușii 2 m; Dacia Logan 4,4 m; tir cu remorcă sau bloc de 4 etaje 12–15 m. <strong>Greutate:</strong> pachet de unt 200 g; doză suc 330 g; laptop sau PS5 3–4 kg; ghiozdan 5 kg; bicicletă pentru copii 12–15 kg; canapea mică 50 kg; mașină mică 1.200 kg; autobuz electric dublu 5.000–6.000 kg. <strong>Consum apă:</strong> lingură mare de ciorbă 15 ml; înghițitură mică 20–30 ml; o cadă plină 150 litri.',
+    win: 'Câștigă primul care adună 7 puncte sau cine are cele mai multe puncte după 6 runde.'
+  },
+  {
+    id: 'detectivul',
+    cat: 'intuitie',
+    catLabel: 'Intuiție & Estimare',
+    icon: '🔎',
+    title: 'Detectivul',
+    subtitle: 'Douăzeci de întrebări, dar doar cu cifre.',
+    sub: 'Cine ghicește animalul cu cele mai puține întrebări.',
+    players: '2–8',
+    age: '9+',
+    time: '15–20 min',
+    extras: 'Pix și hârtie pentru a ține scorul',
+    steps: [
+      'Un jucător alege în secret o carte și o ține ascunsă — este <strong>cartea misterioasă</strong>.',
+      'Ceilalți pun pe rând întrebări cu da/nu, dar <strong>numai despre cifre</strong>: „Cântărește peste 100 kg?", „Trăiește peste 20 de ani?", „E mai rapid de 50 km/h?".',
+      'Detectivul răspunde sincer doar cu „da" sau „nu".',
+      'Oricine crede că știe, ghicește animalul în locul unei întrebări. Dacă greșește, e eliminat din runda curentă.',
+      'Cine ghicește, ia un punct. Cu cât s-au pus mai puține întrebări, cu atât punctele sunt mai multe (sub 5 întrebări — 3 puncte; 6–10 întrebări — 2 puncte; mai mult de 11 întrebări — 1 punct).'
+    ],
+    callout: 'Modul calm. Bun pentru când nu vrei agitație — în mașină, în pat, la masă după prânz.',
+    win: 'Câștigă primul la 7 puncte sau cine adună mai multe puncte în timpul prestabilit.'
+  },
+  {
+    id: 'scara',
+    cat: 'intuitie',
+    catLabel: 'Intuiție & Estimare',
+    icon: '🪜',
+    title: 'Scara animalelor',
+    subtitle: 'Construim o ierarhie pe masă.',
+    sub: 'Fiecare carte trebuie să fie mai mare decât cea de dedesubt.',
+    players: '2–4',
+    age: '8+',
+    time: '10–15 min',
+    extras: 'Nimic în plus',
+    steps: [
+      'Se împart câte 5 cărți fiecărui jucător. Restul rămân ca rezervă. Începe jucătorul născut cel mai aproape de anul nou, apoi se joacă în sens antiorar.',
+      'Jucătorul la rând alege la început o <strong>categorie</strong> și o <strong>direcție</strong> („tot mai greu", „tot mai mic" etc.).',
+      'Apoi pune o carte de pornire pe masă. Pe rând, fiecare joacă o carte care depășește valoarea precedentă în direcția aleasă.',
+      'Dacă nu poți, treci tura și tragi o carte din rezervă (penalizare: –1 punct).',
+      '<strong>Varianta avansată (10+):</strong> diferența dintre două cărți consecutive trebuie să fie cel puțin X, dar maximum Y (stabilite la început).'
+    ],
+    win: 'Câștigă cine scapă primul de toate cărțile.'
+  },
+
+  // ===== MIȘCARE & BLUFF =====
+  {
+    id: 'mincinosul',
+    cat: 'miscare',
+    catLabel: 'Mișcare & Bluff',
+    icon: '🤥',
+    title: 'Mincinosul',
+    subtitle: 'Joc de cacealma cu cifre.',
+    sub: 'Spui adevărul sau bluffezi? Ceilalți trebuie să te prindă.',
+    players: '3–5',
+    age: '8+',
+    time: '15–25 min',
+    extras: 'Nimic în plus',
+    steps: [
+      'Fiecare jucător are 4–5 cărți în mână, ascunse de ceilalți.',
+      'Se alege la început o categorie pentru runda întreagă (ex. greutate).',
+      'Jucătorul de la rând pune o carte <strong>cu fața în jos</strong> și declară o valoare („cântărește 400 kg"). Poate spune adevărul sau poate minți.',
+      'Următorul jucător are două opțiuni: <strong>(a)</strong> joacă peste el o carte <em>cu valoare declarată mai mare</em>, tot cu fața în jos; sau <strong>(b)</strong> strigă „Minți!".',
+      'La „Minți!" se întoarce ultima carte. Dacă cel care a jucat a mințit, ia toate cărțile de pe masă (rău!). Dacă a spus adevărul, le ia cel care a strigat.'
+    ],
+    callout: 'Pentru bluff bun trebuie să știi ce e <em>plauzibil</em>. Un copil ajunge fără să-și dea seama să internalizeze că o vulpe nu poate cântări 400 kg.',
+    win: 'Câștigă cine scapă primul de cărțile din mână. Sau, după 10 min, cine are cele mai puține cărți.'
+  },
+  {
+    id: 'cursa',
+    cat: 'miscare',
+    catLabel: 'Mișcare & Comparare',
+    icon: '🏃',
+    title: 'Cursa animalelor',
+    subtitle: 'Joc cu mișcare, în cameră sau în curte.',
+    sub: 'Fiecare copil devine animalul lui. Stat-ul = pași.',
+    players: '3–6',
+    age: '7+',
+    time: '10–20 min',
+    extras: 'Spațiu de 10–12 metri liber',
+    steps: [
+      'Fiecare jucător primește o singură carte și <strong>devine acel animal</strong>. Se marchează start și finish (8–10 metri).',
+      'În fiecare tură, jucătorul la rând anunță o categorie de joc.',
+      'Animalul cu valoarea cea mai mare din acea categorie face <strong>3 pași</strong> precum acel animal, inclusiv cu sunete. Al doilea, 2 pași. Al treilea, 1 pas. Ultimul, niciun pas. (Numărul de pași se adaptează la nr. de jucători: la 3 jucători primul face 2 pași, la 5 primul face 4 pași, la 6 jucători primul face 6 pași ș.a.m.d.)',
+      'Se amestecă și se redau cărți pentru tura următoare (fiecare jucător păstrează poziția curentă).'
+    ],
+    callout: '<strong>Atenție:</strong> nu folosi categoria „consum de apă" în acest mod — variația dintre cărți e prea mică și pașii devin plictisitori.',
+    win: 'Câștigă primul ajuns la finish.'
+  },
+
+  // ===== ADUNARE & SCĂDERE =====
+  {
+    id: 'camionul',
+    cat: 'matematica',
+    catLabel: 'Adunare & Scădere',
+    icon: '🚛',
+    title: 'Camionul de 1000 kg',
+    subtitle: 'Blackjack cu animale.',
+    sub: 'Încarcă fără să-l rupi.',
+    players: '2–5',
+    age: '8+',
+    time: '10–15 min',
+    extras: 'Hârtie pentru calcul (opțional)',
+    steps: [
+      'Cărțile se așază cu fața în jos în mijloc. Începe jucătorul născut cel mai aproape de 1 iunie, apoi se joacă în sens antiorar. Jucătorul la rând anunță scenariul jocului și o țintă specifică (vezi exemple mai jos).',
+      'Pe rând, fiecare jucător trage o carte și o pune cu fața în sus în fața lui. Anunță valoarea cumulată cu voce tare („250… 450… 720…").',
+      'La fiecare tură, înainte de a trage, jucătorul poate alege să <strong>se oprească</strong> și își fixează scorul.',
+      'Cine depășește valoarea țintă a „rupt camionul" și iese din rundă cu 0 puncte.',
+      'Câștigă runda cine s-a oprit mai aproape de țintă <em>fără</em> să depășească.'
+    ],
+    callout: '<strong>Exemple de scenarii:</strong> <em>Viteză</em> — animalele organizează o super-cursă, dar pădurarul a pus un radar. Viteza limită: 120–170 km/h. <em>Lungime</em> — un pod viu pentru a salva persoana dragă dintr-un lac. Distanța: 400–600 m. <em>Greutate</em> — evacuați animale de la incendiu. Camionul are 850–1200 kg capacitate. <em>Consum apă</em> — fântâna secretă mai are 25–35 litri pe zi.',
+    win: 'Se joacă 5 runde. Câștigă cine a câștigat cele mai multe runde.'
+  },
+  {
+    id: 'ascuns',
+    cat: 'matematica',
+    catLabel: 'Adunare & Scădere',
+    icon: '🔮',
+    title: 'Animalul ascuns',
+    subtitle: 'Deducție cu adunare și scădere.',
+    sub: 'Răspunsurile sunt cifre, nu cuvinte.',
+    players: '2–4',
+    age: '9+',
+    time: '15–25 min',
+    extras: 'Nimic în plus',
+    steps: [
+      'Un jucător trage în secret o carte — este <strong>ascunzătorul</strong>.',
+      'Pe rând, ceilalți ghicesc un animal: „este ursul brun?".',
+      'Ascunzătorul nu spune da/nu — răspunde <strong>cu o diferență</strong>: „animalul meu este cu 350 kg mai greu decât al tău" sau „cu 12 ani mai bătrân".',
+      'Următorul ghicitor folosește informația (adună sau scade) pentru a restrânge căutarea.',
+      'Cine ghicește corect ia un punct și devine următorul ascunzător.'
+    ],
+    callout: 'Pentru 7–8 ani: limitați la categoria „durata de viață" — numere mici, prietenoase. Pentru 10+: folosiți greutatea sau lungimea.',
+    win: 'Câștigă primul la 5 puncte.'
+  },
+  {
+    id: 'cantarul',
+    cat: 'matematica',
+    catLabel: 'Adunare & Scădere',
+    icon: '⚖️',
+    title: 'Cântarul',
+    subtitle: 'Două talere care trebuie echilibrate.',
+    sub: 'Adunare repetată cu strategie.',
+    players: '2',
+    age: '9+',
+    time: '15–25 min',
+    extras: 'Două zone marcate pe masă',
+    steps: [
+      'Se împart câte 6 cărți fiecărui jucător. Jucătorul la rând anunță categoria și o toleranță (de ex. ±50 kg — vezi tabelul recomandărilor).',
+      'Primul jucător pune <strong>1–3 cărți pe talerul stâng</strong> și anunță suma cu voce tare („stânga = 540 kg").',
+      'Următorul jucător trebuie să așeze cărți pe talerul drept astfel încât suma lor să fie în limita toleranței față de stânga.',
+      'Dacă reușește, ia <strong>toate cărțile</strong> de pe ambele talere.',
+      'Dacă nu reușește, pierde tura, iar tot ce a pus rămâne și se acumulează la stânga, îngreunând următoarea încercare.'
+    ],
+    tipTitle: 'Recomandări de toleranță',
+    tip: '<strong>Greutate:</strong> ±100 kg (Ucenic) · ±50 kg (Expert). <strong>Lungime:</strong> ±50 cm (Ucenic) · ±20 cm (Expert). <strong>Vârstă:</strong> ±5 ani (Ucenic) · ±2 ani (Expert). <strong>Viteză:</strong> ±10 km/h (Ucenic) · ±5 km/h (Expert). <strong>Apă:</strong> ±5 litri (Ucenic) · ±2 litri (Expert).',
+    win: 'Câștigă cine are cele mai multe cărți la final.'
+  },
+
+  // ===== ÎNMULȚIRE & PROPORȚII =====
+  {
+    id: 'piramida',
+    cat: 'proportii',
+    catLabel: 'Înmulțire & Proporții',
+    icon: '📐',
+    title: 'Piramida Pas cu Pas',
+    subtitle: 'Construcție pe intervale multiplicative.',
+    sub: 'Fiecare etaj — strict între x2 și x3 (sau x3 și x4) din cel de dedesubt.',
+    players: '2–4',
+    age: '9+',
+    time: '15–20 min',
+    extras: 'Spațiu pe masă pentru construit',
+    steps: [
+      '<strong>Pregătirea:</strong> Toate cărțile din pachet se împart în mod egal jucătorilor. Fiecare își ține cărțile secrete în mână.',
+      '<strong>Alegerea provocării:</strong> Jucătorul cel mai înalt începe prima rundă. El alege categoria (de exemplu: Viteză) și Multiplicatorul rundei: <em>x2 (Ucenic)</em> — fiecare etaj nou trebuie să fie de minimum 2 ori mai mare, dar mai mic de 3 ori decât cel de dedesubt; <em>x3 (Expert)</em> — minimum 3 ori mai mare, dar mai mic de 4 ori.',
+      '<strong>Piatra de Temelie (Baza):</strong> Toți jucătorii își aleg în secret din mână cea mai mică carte pentru categoria respectivă. Cărțile alese se întorc simultan pe masă, iar animalul cu valoarea cea mai mică devine baza piramidei. Restul cărților arătate se întorc în mâinile jucătorilor.',
+      '<strong>Construcția pe intervale:</strong> Pe rând, în sensul acelor de ceasornic, jucătorii pot adăuga câte o singură carte în vârful piramidei, respectând Regula Urcușului Pas cu Pas. La <em>x2</em>: noua carte trebuie să fie cuprinsă strict între [Valoarea de jos × 2] și [Valoarea de jos × 3]. La <em>x3</em>: între [Valoarea de jos × 3] și [Valoarea de jos × 4].',
+      '<strong>Blocajul și Pasul:</strong> Dacă nu ai în mână nicio carte care să se potrivească în intervalul cerut, spui „Pas". Din acel moment, ești blocat și nu mai poți pune cărți în această rundă. Jocul continuă doar între ceilalți jucători activi.'
+    ],
+    callout: '💡 <strong>Exemplu (Viteză, x2):</strong> baza — Popândău comun cu 20 km/h. Etajul 2: intervalul permis este 40–60 km/h. Jucătorul așază Șacalul auriu (40–45 km/h, se încadrează perfect). Pentru etajul 3, luând valoarea medie de 45 km/h, intervalul devine 90–135 km/h — se poate pune Acvila de munte (120–140 km/h). Dacă cineva ar fi vrut să pună direct Iepurele de câmp (70 km/h) peste Popândău (20 km/h), mutarea ar fi fost ilegală — a „sărit" peste interval!',
+    win: 'O piramidă se consideră finalizată când toți jucătorii au spus „Pas" consecutiv. Jucătorul care a așezat ultima carte validă în vârful piramidei câștigă runda și strânge toate cărțile din acea piramidă. Următorul jucător alege o nouă categorie și un nou multiplicator. Jocul se termină când un jucător rămâne complet fără cărți în mână. Câștigă cel care a adunat cele mai multe cărți în teancul de puncte!'
+  },
+  {
+    id: 'familia',
+    cat: 'proportii',
+    catLabel: 'Proporții',
+    icon: '👨‍👩‍👧‍👦',
+    title: 'Familia de mărime',
+    subtitle: 'Ordinele de mărime.',
+    sub: 'Sub 10 · între 10–100 · între 100–1000 · peste 1000.',
+    players: '2–4',
+    age: '8+',
+    time: '10–15 min',
+    extras: 'Nimic în plus',
+    steps: [
+      'Se împart câte 5–6 cărți fiecăruia. Se anunță categoria.',
+      'Fiecare caută în mâna lui cărți care aparțin <strong>aceluiași ordin de mărime</strong>.',
+      'Familiile sunt: sub 10 · între 10 și 100 · între 100 și 1000 · peste 1000.',
+      'Primul care găsește o familie de <strong>3 cărți</strong> din același ordin strigă „familie!" și ia 1 punct.',
+      'Dacă greșește, sare peste runda următoare.'
+    ],
+    callout: 'Predă direct conceptul de <em>ordin de mărime</em> — infrastructura pe care se construiește intuiția numerică.',
+    win: 'Câștigă primul la 5 puncte.'
+  },
+  {
+    id: 'cati-incap',
+    cat: 'proportii',
+    catLabel: 'Proporții',
+    icon: '📦',
+    title: 'Câți încap?',
+    subtitle: 'Animix cu împărțire.',
+    sub: 'Cât de zdrobitor a fost knock-out-ul.',
+    players: '2–4',
+    age: '9+',
+    time: '15–25 min',
+    extras: 'Hârtie pentru scor',
+    steps: [
+      'Se joacă ca Război: alegi categoria, valoarea mai mare câștigă.',
+      'Punctele câștigate = de <strong>câte ori cartea adversarului încape în cartea ta</strong> (rotunjit în jos).',
+      'Ursul 400 kg vs vulpea 8 kg → 50 puncte (400 ÷ 8). Ursul 400 kg vs lupul 40 kg → 10 puncte. Ursul 400 kg vs un animal de 380 kg → 1 punct.',
+      'Dacă pe cartea jucată este indicat un interval (de ex. „durata de viață iepure 6–12 ani"), se va considera valoarea cea mai mică pentru împărțire.'
+    ],
+    callout: 'Bătăile strânse aproape nu valorează. Bătăile zdrobitoare aduc multe puncte. Schimbă cu totul ce „carte tare" înseamnă.',
+    win: 'Se joacă până se termină cărțile. Câștigă cel cu scorul total cel mai mare.'
+  }
+];
+
+
+// ========== ROUTING ==========
+const landing = document.getElementById('landing');
+const reader = document.getElementById('reader');
+const pages = document.getElementById('pages');
+const backBtn = document.getElementById('backBtn');
+const prevBtn = document.getElementById('prevBtn');
+const nextBtn = document.getElementById('nextBtn');
+const progress = document.getElementById('readerProgress');
+
+// Build landing grid
+function buildLanding() {
+  const cats = {};
+  MODES.forEach(m => {
+    if (!cats[m.cat]) cats[m.cat] = [];
+    cats[m.cat].push(m);
+  });
+  for (const cat in cats) {
+    const grid = document.querySelector(`.mode-grid[data-category="${cat}"]`);
+    if (!grid) continue;
+    cats[cat].forEach((m, i) => {
+      const idx = MODES.indexOf(m);
+      const card = document.createElement('button');
+      card.className = 'mode-card';
+      card.dataset.idx = idx;
+      card.innerHTML = `
+        <span class="icon">${m.icon}</span>
+        <span class="meta">
+          <span class="mode-title">${m.title}</span>
+          <span class="mode-sub">${m.sub}</span>
+        </span>
+        <span class="arrow">→</span>
+      `;
+      card.addEventListener('click', () => openReader(idx));
+      grid.appendChild(card);
+    });
+  }
+}
+
+// Build reader pages (all modes pre-rendered for swipe nav)
+function buildReader() {
+  MODES.forEach((m, i) => {
+    const p = document.createElement('article');
+    p.className = 'page';
+    p.dataset.tone = m.cat;
+    p.dataset.idx = i;
+
+    let tipHtml = '';
+    if (m.tip) {
+      tipHtml = `
+        <aside class="callout">
+          <div class="callout-title">${m.tipTitle || 'Tip pentru părinți'}</div>
+          ${m.tip}
+        </aside>`;
+    }
+
+    let calloutHtml = '';
+    if (m.callout) {
+      calloutHtml = `<aside class="callout">${m.callout}</aside>`;
+    }
+
+    p.innerHTML = `
+      <div class="eyebrow">${m.catLabel}</div>
+      <span class="icon-big">${m.icon}</span>
+      <h1>${m.title}</h1>
+      <p class="subtitle">${m.subtitle}</p>
+
+      <div class="specs">
+        <span class="spec"><span class="label">Jucători</span> ${m.players}</span>
+        <span class="spec"><span class="label">Vârstă</span> ${m.age}</span>
+        <span class="spec"><span class="label">Timp</span> ${m.time}</span>
+        ${m.extras && m.extras !== 'Nimic în plus' ? `<span class="spec"><span class="label">Ai nevoie</span> ${m.extras}</span>` : ''}
+      </div>
+
+      <div class="section-label">Cum se joacă</div>
+      <ol class="steps">
+        ${m.steps.map(s => `<li>${s}</li>`).join('')}
+      </ol>
+
+      ${calloutHtml}
+      ${tipHtml}
+
+      <div class="win">
+        <div class="section-label">Cum se termină</div>
+        <p>${m.win}</p>
+      </div>
+    `;
+    pages.appendChild(p);
+  });
+}
+
+function openReader(idx) {
+  reader.classList.add('open');
+  reader.setAttribute('aria-hidden', 'false');
+  document.body.style.overflow = 'hidden';
+  // Show swipe hint briefly on first open
+  if (!sessionStorage.getItem('hinted')) {
+    const hint = document.createElement('div');
+    hint.className = 'swipe-hint';
+    hint.textContent = 'Glisează ← → pentru a trece la alt mod';
+    document.body.appendChild(hint);
+    setTimeout(() => hint.remove(), 3200);
+    try { sessionStorage.setItem('hinted', '1'); } catch(e) {}
+  }
+  // Jump (no smooth) to selected page
+  requestAnimationFrame(() => {
+    const page = pages.children[idx];
+    pages.scrollTo({ left: page.offsetLeft, behavior: 'instant' });
+    updateNav();
+  });
+}
+
+function closeReader() {
+  reader.classList.remove('open');
+  reader.setAttribute('aria-hidden', 'true');
+  document.body.style.overflow = '';
+}
+
+function getCurrentIdx() {
+  const scroll = pages.scrollLeft;
+  const w = pages.clientWidth;
+  return Math.round(scroll / w);
+}
+
+function updateNav() {
+  const i = getCurrentIdx();
+  const m = MODES[i];
+  if (!m) return;
+  progress.textContent = `${i + 1} / ${MODES.length} · ${m.catLabel}`;
+  prevBtn.disabled = (i === 0);
+  nextBtn.disabled = (i === MODES.length - 1);
+  // scroll page body to top
+  document.querySelector('.reader-body').scrollTop = 0;
+}
+
+prevBtn.addEventListener('click', () => {
+  const i = getCurrentIdx();
+  if (i > 0) {
+    pages.scrollTo({ left: pages.children[i - 1].offsetLeft, behavior: 'smooth' });
+  }
+});
+
+nextBtn.addEventListener('click', () => {
+  const i = getCurrentIdx();
+  if (i < MODES.length - 1) {
+    pages.scrollTo({ left: pages.children[i + 1].offsetLeft, behavior: 'smooth' });
+  }
+});
+
+backBtn.addEventListener('click', closeReader);
+
+// Update nav on scroll snap
+let scrollTimer;
+pages.addEventListener('scroll', () => {
+  clearTimeout(scrollTimer);
+  scrollTimer = setTimeout(updateNav, 80);
+});
+
+// Keyboard nav
+document.addEventListener('keydown', (e) => {
+  if (!reader.classList.contains('open')) return;
+  if (e.key === 'ArrowLeft') prevBtn.click();
+  else if (e.key === 'ArrowRight') nextBtn.click();
+  else if (e.key === 'Escape') closeReader();
+});
+
+buildLanding();
+buildReader();
+</script>
+</body>
+</html>
